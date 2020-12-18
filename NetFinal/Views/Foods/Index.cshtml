@@ -1,0 +1,51 @@
+﻿@model IEnumerable<NetFinal.Models.Food>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create">Create New</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.FoodID">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.FoodID">Delete</a>
+                }
+                <a asp-action="Details" asp-route-id="@item.FoodID">Details</a>
+                @if (User.IsInRole("User"))
+                {
+                    <a  asp-controller="Orders" asp-action="Create"  asp-area="Post" asp-route-clientid="1" asp-route-foodid="@item.FoodID" asp-route-address="Change Address" asp-route-numb="1" asp-route-totalcost="@item.Cost" >Order</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
