@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NetFinal.Data;
 using NetFinal.Models;
+using NetFinal.Services;
 
 namespace NetFinal.Controllers
 {
@@ -18,12 +19,27 @@ namespace NetFinal.Controllers
         {
             _context = context;
         }
+        //
+        private readonly FoodService _foodService;
 
+        public FoodsController(FoodService foodService)
+        {
+            _foodService = foodService;
+        }
         // GET: Foods
         public async Task<IActionResult> Index()
         {
+            var food = await _foodService.GetFoods();
+            return View(food);
+        }//
+
+
+
+        // GET: Foods
+       /* public async Task<IActionResult> Index()
+        {
             return View(await _context.Food.ToListAsync());
-        }
+        }*/
 
         // GET: Foods/Details/5
         public async Task<IActionResult> Details(int? id)

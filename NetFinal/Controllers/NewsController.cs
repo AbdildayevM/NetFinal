@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NetFinal.Data;
 using NetFinal.Models;
+using NetFinal.Services;
 
 namespace NetFinal.Controllers
 {
@@ -19,14 +20,27 @@ namespace NetFinal.Controllers
             _context = context;
         }
 
+        private readonly NewsService _newsService;
+
+        public NewsController(NewsService newsService)
+        {
+            _newsService = newsService;
+        }
         // GET: News
         public async Task<IActionResult> Index()
         {
-            return View(await _context.News.ToListAsync());
-        }
+            var news = await _newsService.GetNews();
+            return View(news);
+        }//
 
-        // GET: News/Details/5
-        public async Task<IActionResult> Details(int? id)
+            // GET: News
+            /*public async Task<IActionResult> Index()
+            {
+                return View(await _context.News.ToListAsync());
+            }*/
+
+            // GET: News/Details/5
+            public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {

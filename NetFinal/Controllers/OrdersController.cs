@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NetFinal.Data;
 using NetFinal.Models;
+using NetFinal.Services;
 
 namespace NetFinal.Controllers
 {
@@ -19,11 +20,23 @@ namespace NetFinal.Controllers
             _context = context;
         }
 
+        private readonly OrderService _orderService;
+
+        public OrdersController(OrderService orderService)
+        {
+            _orderService = orderService;
+        }
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Order.ToListAsync());
+            var order = await _orderService.GetOrders();
+            return View(order);
         }
+        // GET: Orders
+        /*public async Task<IActionResult> Index()
+        {
+            return View(await _context.Order.ToListAsync());
+        }*/
 
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -46,6 +59,7 @@ namespace NetFinal.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
+            ViewBag.Food = _context.Food.Select(li => new SelectListItem { Text = li.Title, Value = li.FoodID.ToString() });
             return View();
         }
 
@@ -56,8 +70,11 @@ namespace NetFinal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,ClientID,FoodID,Address,Numb,TotalCost,Ordertime")] Order order)
         {
+            var foodId = Request.Form["FoodID"];
+            //var foodO = _context.Order.FirstOrDefault(x => x.FoodID == foodId);
             if (ModelState.IsValid)
             {
+                //order.FoodID = foodId;
                 _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
