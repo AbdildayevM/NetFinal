@@ -20,7 +20,7 @@ namespace NetFinal.Controllers
             _context = context;
         }
 
-        private readonly PartnersService _partnersService;
+        /*private readonly PartnersService _partnersService;
 
         public PartnersController(PartnersService partnersService)
         {
@@ -31,13 +31,13 @@ namespace NetFinal.Controllers
         {
             var partners = await _partnersService.GetPartners();
             return View(partners);
-        }
+        }*/
 
         // GET: Partners
-        /*public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             return View(await _context.Partners.ToListAsync());
-        }*/
+        }
 
         // GET: Partners/Details/5
         public async Task<IActionResult> Details(int? id)

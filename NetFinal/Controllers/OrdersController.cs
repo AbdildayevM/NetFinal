@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NetFinal.Data;
 using NetFinal.Models;
+using NetFinal.Repositories;
 using NetFinal.Services;
 
 namespace NetFinal.Controllers
@@ -20,9 +21,9 @@ namespace NetFinal.Controllers
             _context = context;
         }
 
-        private readonly OrderService _orderService;
+        private readonly OrderRepository _orderRepo;
 
-        public OrdersController(OrderService orderService)
+        /*public OrdersController(OrderService orderService)
         {
             _orderService = orderService;
         }
@@ -31,12 +32,12 @@ namespace NetFinal.Controllers
         {
             var order = await _orderService.GetOrders();
             return View(order);
-        }
+        }*/
         // GET: Orders
-        /*public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             return View(await _context.Order.ToListAsync());
-        }*/
+        }
 
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -71,7 +72,7 @@ namespace NetFinal.Controllers
         public async Task<IActionResult> Create([Bind("ID,ClientID,FoodID,Address,Numb,TotalCost,Ordertime")] Order order)
         {
             var foodId = Request.Form["FoodID"];
-            //var foodO = _context.Order.FirstOrDefault(x => x.FoodID == foodId);
+            //var foodO = _orderRepo.AllOrders.FirstOrDefault(x => x.FoodID == foodId);
             if (ModelState.IsValid)
             {
                 //order.FoodID = foodId;

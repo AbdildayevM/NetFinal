@@ -21,5 +21,7 @@ namespace NetFinal.Repositories
         {
             return _context.Order.ToListAsync();
         }
+
+        public IEnumerable<Order> AllOrders => _context.Order;
     }
 }

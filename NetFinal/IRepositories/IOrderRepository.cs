@@ -9,5 +9,6 @@ namespace NetFinal.Repositories
     public interface IOrderRepository
     {
         Task<List<Order>> GetAll();
+        IEnumerable<Order> AllOrders { get; }
     }
 }

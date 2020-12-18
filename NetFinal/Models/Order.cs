@@ -24,11 +24,11 @@ namespace NetFinal.Models
         {
         }
 
-        [Remote(action: "ValidateOrderId", controller: "Orders")]
+        
         public int ID { get; set; }
         public int ClientID { get; set; }
         public int FoodID { get; set; }
-        [Required]
+       
         public string Address { get; set; }
         public int Numb { get; set; } //number of ordered food
         public double TotalCost { get; set; }

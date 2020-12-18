@@ -20,7 +20,7 @@ namespace NetFinal.Controllers
             _context = context;
         }
         //
-        private readonly FoodService _foodService;
+        /*private readonly FoodService _foodService;
 
         public FoodsController(FoodService foodService)
         {
@@ -31,15 +31,15 @@ namespace NetFinal.Controllers
         {
             var food = await _foodService.GetFoods();
             return View(food);
-        }//
+        }*///
 
 
 
         // GET: Foods
-       /* public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             return View(await _context.Food.ToListAsync());
-        }*/
+        }
 
         // GET: Foods/Details/5
         public async Task<IActionResult> Details(int? id)

@@ -20,7 +20,7 @@ namespace NetFinal.Controllers
             _context = context;
         }
 
-        private readonly NewsService _newsService;
+        /*private readonly NewsService _newsService;
 
         public NewsController(NewsService newsService)
         {
@@ -31,13 +31,13 @@ namespace NetFinal.Controllers
         {
             var news = await _newsService.GetNews();
             return View(news);
-        }//
+        }*///
 
             // GET: News
-            /*public async Task<IActionResult> Index()
+            public async Task<IActionResult> Index()
             {
                 return View(await _context.News.ToListAsync());
-            }*/
+            }
 
             // GET: News/Details/5
             public async Task<IActionResult> Details(int? id)
