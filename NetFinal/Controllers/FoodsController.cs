@@ -36,9 +36,39 @@ namespace NetFinal.Controllers
 
 
         // GET: Foods
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
-            return View(await _context.Food.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            var foods = from s in _context.Food
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                foods = foods.Where(s => s.Title.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    foods = foods.OrderByDescending(s => s.Title);
+                    break;
+                default:
+                    foods = foods.OrderBy(s => s.Title);
+                    break;
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<Food>.CreateAsync(foods.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Foods/Details/5
