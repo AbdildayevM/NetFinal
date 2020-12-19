@@ -3,11 +3,11 @@
 @{
     Layout = "~/Views/Shared/_ForLog.cshtml";
 }
-
-<h1>Registration</h1>
+<br />
+<center><h1>Registration</h1></center>
 
 <hr />
-<div class="row">
+<div class="row"  style="position: relative; left: 35%">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -40,9 +40,10 @@
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+        <div>
+            <a asp-action="Login">Back to List</a>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Login">Back to List</a>
-</div>
+

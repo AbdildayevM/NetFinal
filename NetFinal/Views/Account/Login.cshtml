@@ -1,13 +1,17 @@
 ﻿@{
     Layout = "~/Views/Shared/_ForLog.cshtml";
 }
-<div class="container">
+<div class="container" style=" position: absolute;
+        left: 75%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px">
     <div class="row">
         <div class="col-md-3">
-            <h3>Login</h3>
-            <form asp-action="Login" method="post">
+            <h3><center>Sign in</center></h3>
+            <form style="position:relative; display: block" asp-action="Login" method="post">
                 <div class="form-group">
-                    <label>UserName</label>
+                    <label>Login/Name</label>
                     <input type="text" class="form-control" id="username" name="username" />
                 </div>
                 <div class="form-group">
@@ -16,12 +20,12 @@
                 </div>
                 <div class="form-group">
                     <label></label>
-                    <input type="submit" class="btn btn-primary" value="Login" />
+                    <center><input type="submit" class="btn btn-primary" value="Login" /></center>
                 </div>
             </form>
         </div>
     </div>
-</div>
-<div>
-    <a asp-action="Create">I don't registered yet</a>
+    <div>
+        <a asp-action="Create">I don't registered yet</a>
+    </div>
 </div>
